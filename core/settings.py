@@ -49,7 +49,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "backend_led_cube.urls"
+ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "backend_led_cube.wsgi.application"
+WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
