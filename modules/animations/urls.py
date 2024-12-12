@@ -6,4 +6,6 @@ from .views import AnimationViewSet
 router = DefaultRouter()
 router.register(r"", AnimationViewSet, basename="animation")
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = [
+    path("", include(router.urls)),
+]
