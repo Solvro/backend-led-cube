@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Animation
+from modules.animations.models import Animation
 
 
 class AnimationSerializer(serializers.ModelSerializer):

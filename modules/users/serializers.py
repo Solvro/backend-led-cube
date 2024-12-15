@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from rest_framework import permissions, serializers
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
-    permission_classes = [permissions.AllowAny]
 
     class Meta:
         model = User
