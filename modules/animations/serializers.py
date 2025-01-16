@@ -8,3 +8,15 @@ class AnimationSerializer(serializers.ModelSerializer):
         model = Animation
         fields = ["id", "owner", "name", "description", "animation"]
         read_only_fields = ["id", "owner"]
+
+    def validate_animation(self, value):
+        if len(value) > 10_000:
+            raise serializers.ValidationError("Animation code is too long.")
+
+        suspicious_tokens = ["require(", "fs.", "child_process", "import "]
+        if any(token in value for token in suspicious_tokens):
+            raise serializers.ValidationError(
+                "Suspicious tokens found in animation code."
+            )
+
+        return value
