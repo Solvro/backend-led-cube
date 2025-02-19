@@ -4,6 +4,10 @@ from modules.animations.models import Animation
 
 
 class AnimationSerializer(serializers.ModelSerializer):
+    owner = serializers.CharField(
+        source="owner.username", read_only=True
+    )
+
     class Meta:
         model = Animation
         fields = ["id", "owner", "name", "description", "animation"]
