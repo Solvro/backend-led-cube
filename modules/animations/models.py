@@ -9,6 +9,5 @@ class Animation(models.Model):
     animation = models.TextField()
     liked_by = models.ManyToManyField(User, related_name="liked_animations", blank=True)
 
-
     def __str__(self):
         return self.name

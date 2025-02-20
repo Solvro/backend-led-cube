@@ -13,17 +13,13 @@ def validate_animation(value):
 
     suspicious_tokens = ["require(", "fs.", "child_process", "import "]
     if any(token in value for token in suspicious_tokens):
-        raise serializers.ValidationError(
-            "Suspicious tokens found in animation code."
-        )
+        raise serializers.ValidationError("Suspicious tokens found in animation code.")
 
     return value
 
 
 class AnimationSerializer(serializers.ModelSerializer):
-    owner = serializers.CharField(
-        source="owner.username", read_only=True
-    )
+    owner = serializers.CharField(source="owner.username", read_only=True)
     like_count = serializers.SerializerMethodField()
     is_liked = serializers.SerializerMethodField()
 
@@ -36,5 +32,13 @@ class AnimationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Animation
-        fields = ["id", "owner", "name", "description", "animation", "like_count", "is_liked"]
+        fields = [
+            "id",
+            "owner",
+            "name",
+            "description",
+            "animation",
+            "like_count",
+            "is_liked",
+        ]
         read_only_fields = ["id", "owner"]
