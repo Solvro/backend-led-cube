@@ -1,10 +1,16 @@
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from modules.animations.models import Animation
 
-
-def get_like_count(obj):
+@extend_schema_field(int)
+def get_like_count(self, obj) -> int:
     return obj.liked_by.count()
+
+@extend_schema_field(bool)
+def get_is_liked(self, obj) -> bool:
+    user = self.context.get("request").user
+    return user in obj.liked_by.all() if user.is_authenticated else False
 
 
 def validate_animation(value):
@@ -42,3 +48,5 @@ class AnimationSerializer(serializers.ModelSerializer):
             "is_liked",
         ]
         read_only_fields = ["id", "owner"]
+
+

@@ -8,6 +8,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 
 from modules.animations.models import Animation
+from modules.animations.permissions import IsOwnerOrReadOnly
 from modules.animations.serializers import AnimationSerializer
 
 
@@ -24,6 +25,7 @@ class AnimationFilter(django_filters.FilterSet):
 class AnimationViewSet(viewsets.ModelViewSet):
     queryset = Animation.objects.all()
     serializer_class = AnimationSerializer
+    permission_classes = [IsOwnerOrReadOnly]
 
     @extend_schema(
         summary="Get all liked animations",
